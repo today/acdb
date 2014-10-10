@@ -9,16 +9,9 @@ prt("$oIE_2" & _IEPropertyGet($oIE, "locationurl") )
 
 
 
-$oIE_2 = _IEAttach("模糊查询", "text")
-If @error<>0 Then
-   prt( "Error Code:"&@error&"//")
-Else
-   prt("$oIE_2" & _IEPropertyGet($oIE_2, "locationurl") )
-endIf
-
-
+; 再找到输入查询条件的那个  iframe
 $oIE_3 = _IEFrameGetObjByName($oIE, "frm-49")
-prt("$oIE_3" & _IEPropertyGet($oIE_3, "locationurl") )
+prt("URL:" & _IEPropertyGet($oIE_3, "locationurl") )
 
 
 $oInput = _IEGetObjById ( $oIE_3, "qtelno" )
@@ -31,6 +24,30 @@ $oButton = _IETagNameGetCollection( $oIE_3, "button", 1 )
 ;MsgBox($MB_OK, "debug", $oButton.innertext )
 _IEAction($oButton, "click")
 
+; 等待查询结果出现
+sleep(5000)
+
+; 再找到出错提示文本
+$oText = _IEGetObjById ( $oIE_3, "ext-comp-1033" )
+$iBrowserx = 0  ;用来做为判断是否找到内容的Flag
+If @error<>0 Then
+   prt( "Error Code:"&@error&"//")
+Else
+   $iBrowserx = _IEPropertyGet ( $oText, "browserx" )
+   prt("$oText.visible:" & $iBrowserx )
+endIf
+
+If $iBrowserx>0 Then
+   prt("Nothing finded.")
+ElseIf $iBrowserx<0 Then
+   prt("Find it.")
+Else
+   prt("Error. Please Debug.")
+EndIf
+
+
+
+;~ ; 遍历所有的 Button
 ;~ For $tag In $oButton
 ;~ 	prt("tag.id:" & $tag.id )
 ;~ 	prt("tag:" & $tag.innertext )
@@ -39,17 +56,6 @@ _IEAction($oButton, "click")
 
 
 
-
-;~ $oTags = _IETagNameAllGetCollection  ($oIE_3 )
-;~ If @error<>0 Then
-;~    prt( "Error Code:"&@error&"//")
-;~ Else
-;~    For $tag In $oTags
-;~ 	   prt("tag.id:" & $tag.id )
-;~    Next
-
-;~ endIf
-;prt( _IEPropertyGet($oText, "tagname ") )
 
 
 prt("Finished.")
