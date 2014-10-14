@@ -8,31 +8,22 @@ _Singleton("SingleAutoTest")
 
 prt(@ScriptName & " start.")
 
-OpenIE()
-
-$server_URL = "http://221.179.176.29:8180/acdb_ms/login.jsp"
-
-Sleep( 3000 )
-Send("{F4}")
-Sleep(300)
-Send("{BACKSPACE}")
-Sleep(300)
-Send($server_URL)
-Sleep(900)
-Send("{ENTER}")
-
-
-Sleep( 3000 )
-
-
-$oForm = _IEFormGetObjByName ($oIE, "f")
-$oQuery1 = _IEFormElementGetObjByName ($oForm, "wd")
-_IEFormElementSetValue ($oQuery1, "与 autoit3 亲密接触")
 
 
 
 
-;CloseIE()
+
+If FileExists( @ScriptDir & "\test_acdb.csv" ) Then
+   ; 读入文件内容
+
+   ; 循环查找
+
+   ; 记录结果
+
+   sleep(5000)
+Else
+   msg("Not found test_acdb.csv 请检查相关目录。")
+EndIf
 
 
 ; -----------------------------------------  函数的分隔线  -----------------------------------------------

@@ -7,8 +7,6 @@ prt("Start")
 $oIE = _IECreate("http://221.179.176.29:8180/acdb_ms/menu!main.action",1,1,1,1)
 prt("$oIE_2" & _IEPropertyGet($oIE, "locationurl") )
 
-
-
 ; 再找到输入查询条件的那个  iframe
 $oIE_3 = _IEFrameGetObjByName($oIE, "frm-49")
 prt("URL:" & _IEPropertyGet($oIE_3, "locationurl") )
@@ -29,34 +27,30 @@ sleep(5000)
 
 ; 再找到出错提示文本
 $oText = _IEGetObjById ( $oIE_3, "ext-comp-1033" )
-$iBrowserx = 0  ;用来做为判断是否找到内容的Flag
+$iBrowser_x = 0  ;用来做为判断是否找到内容的Flag
 If @error<>0 Then
    prt( "Error Code:"&@error&"//")
 Else
-   $iBrowserx = _IEPropertyGet ( $oText, "browserx" )
-   prt("$oText.visible:" & $iBrowserx )
+   $iBrowser_x = _IEPropertyGet ( $oText, "browserx" )
+   prt("$oText.visible:" & $iBrowser_x )
 endIf
 
-If $iBrowserx>0 Then
-   prt("Nothing finded.")
-ElseIf $iBrowserx<0 Then
-   prt("Find it.")
+If $iBrowser_x>0 Then
+   pop("Nothing finded.")
+ElseIf $iBrowser_x<0 Then
+   pop("Find it.")
 Else
-   prt("Error. Please Debug.")
+   pop("Error. Please Debug.")
 EndIf
-
-
-
-;~ ; 遍历所有的 Button
-;~ For $tag In $oButton
-;~ 	prt("tag.id:" & $tag.id )
-;~ 	prt("tag:" & $tag.innertext )
-;~ 	MsgBox($MB_OK, "debug", $tag.innertext )
-;~ Next
-
-
-
 
 
 prt("Finished.")
 ; -----------------------------------------  函数的分隔线  -----------------------------------------------
+
+
+
+
+
+
+
+
