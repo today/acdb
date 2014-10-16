@@ -47,6 +47,7 @@ If FileExists( @ScriptDir & "\test_acdb.csv" ) Then
 
 
    sleep(1000)
+   msg("运行结束")
 Else
    msg("Not found test_acdb.csv 请检查相关目录。")
 EndIf
