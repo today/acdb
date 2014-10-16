@@ -10,16 +10,13 @@ _Singleton("SingleAutoTest")
 prt(@ScriptName & " start.")
 
 
-
-
-
-
 If FileExists( @ScriptDir & "\test_acdb.csv" ) Then
    ; 读入文件内容
    $csvfile = FileOpen( @ScriptDir & "\test_acdb.csv", 0)
    $outFile = FileOpen(  @ScriptDir & "\result.csv" , 1)   ; 参数1 代表 append 模式
 
    ; 循环查找
+   Local $iCount = 0
    While 1
 	  $line = FileReadLine($csvfile)
 	  If @error = -1 Then
@@ -39,7 +36,8 @@ If FileExists( @ScriptDir & "\test_acdb.csv" ) Then
 	  ; 记录结果
 	  FileWriteLine($outFile, $strArray[3] & "," & $strArray[5] &  "," & $retStr)
 
-	  ;prt( "Process:" &  $line )
+	  $iCount = $iCount + 1
+	  prt( "Process Line:" &  $iCount )
 
    WEnd
    FileClose($csvfile)
