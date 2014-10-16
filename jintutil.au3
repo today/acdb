@@ -50,7 +50,8 @@ EndFunc
 ;在console中打印出日志
 Func prt($str)
 	if @compiled == 1 Then
-		FileWriteLine(@ScriptDir & "\log.log", getCurrTime() & " " & $str)
+		;FileWriteLine(@ScriptDir & "\log.log", getCurrTime() & " " & $str)
+		ConsoleWrite( getCurrTime() & " " & $str & @CRLF )
 	else
 		ConsoleWrite( getCurrTime() & " " & $str & @CRLF )
 	EndIf
